@@ -1,0 +1,52 @@
+#!/usr/bin/env node
+'use strict';
+
+
+
+/**
+  * commands 
+
+  init      - start a new app by building our stacketry.json, seting an app name, 
+  open      - starts the app as a local service and open the browser to it 
+  install   - attach a new interweb based dependancy to the app (uusually this
+              will be 3rd party package) What's needed here is the bower name 
+              and version, we register that in stacketry.json (no bower.json needed)
+              and resolve it at runtime from the net. It optionall can be cached 
+              in local storage to support an offline mode if needed) 
+  add       - adds a new "private" resource to a projects.  Private resources 
+              are managed as local dependancies during development.  stacketry.js 
+              resoves these from the file system via the local server during dev
+              and remotely from stacketry in production. 
+  list      - dump the entire dependancy manifest
+  push      - push the app to stacketry - changes are effective immediately
+
+
+  stacketry.js pulls in and caches all remote dependancies
+  from the interwebs, cahces in local storeagte, injets into the 
+  dom and launches the app - it works the same no matter if run 
+  from local or remote - except for "private" assets which will be
+  shadowed on teh local disk, mirrored to stacketry, and served remotely
+  from production if loading from the stacketry hosted (or other
+  pivate)endpoint
+  
+  *
+  */
+
+
+process.bin = process.title = 'stacketry';
+
+var program = require('commander')
+
+program
+  .version('0.0.1')
+  .option('-c, --conf <path>', 'config file [stacketry.json]')
+  .option('-p, --port <port>', 'local server listens on port [5000]')
+
+require('../lib/commands/init.js').setup(program)
+require('../lib/commands/open.js').setup(program)
+
+program.parse(process.argv);
+
+
+
+
