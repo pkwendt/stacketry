@@ -3,7 +3,10 @@
   "version": "0.0.1",
   "description": "Build and deploy awesome HTML5 apps - no server required.",
   "author": "Rodney Muras",
-  "repository": "rodneym/stacketry",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/rodneym/stacketry.git"
+  },
   "license": {
     "type": "MIT",
     "url": "http://github.com/rodneym/stacketry/raw/master/LICENSE"
